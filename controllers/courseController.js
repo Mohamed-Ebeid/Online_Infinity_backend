@@ -39,8 +39,38 @@ export const deleteCourse = async (req, res) => {
 		return res.status(401).send("Unauthorized access!");
 	}
 	try {
-		const deleted = await Course.findByIdAndRemove(req.params.courseId);
-		res.json("Deleted successfully! ");
+		const course = await Course.findById(req.params.courseId);
+		if (course) {
+			await Course.findByIdAndRemove(req.params.courseId);
+			res.json("Deleted successfully! ");
+		} else {
+			res.json("Does not exists! ");
+		}
+	} catch (e) {
+		return res.status(400).send(e.message);
+	}
+};
+
+//Updating a course
+export const updateCourse = async (req, res) => {
+	if (req.headers && req.headers.auth !== "admin") {
+		return res.status(401).send("Unauthorized access!");
+	}
+	try {
+		const { name, description, instructor, duration, numberOfSeats } = req.body;
+		const course = await Course.findById(req.params.courseId);
+		if (course) {
+			course.name = name;
+			course.description = description;
+			course.instructor = instructor;
+			course.duration = duration;
+			course.numberOfSeats = numberOfSeats;
+
+			await course.save();
+			res.json("Done");
+		} else {
+			res.json("This course does not exsits!");
+		}
 	} catch (e) {
 		return res.status(400).send(e.message);
 	}

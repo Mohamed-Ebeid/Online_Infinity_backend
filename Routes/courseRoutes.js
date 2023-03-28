@@ -3,6 +3,7 @@ import {
   courses,
   postCourse,
   deleteCourse,
+  updateCourse,
 } from "../controllers/courseController.js";
 
 const courseRouter = express.Router();
@@ -11,5 +12,6 @@ const courseRouter = express.Router();
 courseRouter.get("/", courses);
 courseRouter.post("/", postCourse);
 courseRouter.delete("/:courseId", deleteCourse);
+courseRouter.put("/:courseId", updateCourse);
 
 export default courseRouter;
