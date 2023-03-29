@@ -15,6 +15,20 @@ export const courses = async (req, res) => {
 	}
 };
 
+//Getting a single course
+export const course = async (req, res) => {
+	try {
+		const course = await Course.findById(req.params.courseId);
+		if (course) {
+			return res.send(course);
+		} else {
+			res.json("Does not exists! ");
+		}
+	} catch (e) {
+		return res.status(400).send(e.message);
+	}
+};
+
 //Adding a new curse
 export const postCourse = async (req, res) => {
 	//authorization, we could have used it as middleware but since it's a small backend I didn't see the need to
