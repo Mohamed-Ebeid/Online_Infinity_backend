@@ -8,7 +8,7 @@ mongoose.Promise = global.Promise;
 var courseSchema = new Schema(
   {
     //creating collections
-    name: { type: String, required: true, unique: true },
+    name: { type: String, required: true },
     description: { type: String, required: true },
     instructor: { type: String, required: true },
     duration: { type: String, required: true },
