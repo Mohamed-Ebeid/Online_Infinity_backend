@@ -12,7 +12,10 @@ Using NodeJS, ExpressJS aand MongoDB for managing the backend
 npm install
 ```
 
-3-Create a .env file and add the MongoDB link.
+3-Create a .env file and add the MongoDB link like this.
+```bash
+DATABASE=yourmongoDBLink
+```
 
 4-Run the command in the terminal.
 
